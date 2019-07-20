@@ -16,7 +16,7 @@ M5310 有一个光照传感器，有一个可以远程控制开关的小灯。�
 - Header 参数：api-key, Content-Type
 - 请求 Body 参数：data
 
-可以现在 POSTMAN 中测试 API，测试通过后再去编程：
+可以先在 POSTMAN 中测试 API，测试通过后再去编程：
 
 ![image_1dg88vpft152l1vtrb9817ca1g151t.png-82.8kB][1]
 
@@ -66,8 +66,11 @@ http://www.xxxx.com/o/9UExxxxxxxxxxxxxxxxxxxxxkos=/8858xxxxxxxxxxx
 # 打开小灯，长度 64
 http://www.xxxx.top/o9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
 
+规则：http://www.xxxx.top/o+apiKey+IMEI
+
 # 关闭小灯，长度 64
 http://www.xxxx.top/c9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
+规则：http://www.xxxx.top/c+apiKey+IMEI
 ```
 
 > **注意**：对外暴露 apiKey 和 IMEI 是很危险的。此例为了让所有人都可以访问云服务，不得已而为之。
