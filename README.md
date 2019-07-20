@@ -65,7 +65,6 @@ http://www.xxxx.com/o/9UExxxxxxxxxxxxxxxxxxxxxkos=/8858xxxxxxxxxxx
 ```
 # 打开小灯，长度 64
 http://www.xxxx.top/o9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
-
 规则：http://www.xxxx.top/o+apiKey+IMEI
 
 # 关闭小灯，长度 64
