@@ -63,13 +63,11 @@ http://www.xxxx.com/o/9UExxxxxxxxxxxxxxxxxxxxxkos=/8858xxxxxxxxxxx
 现在剩下的唯一的办法是把路径中的 */* 符号去掉，长度刚好为 64。所以，最终设计为：
 
 ```
-# 打开小灯，长度 64
+# 打开小灯，长度 64，规则：http://www.xxxx.top/o+apiKey+IMEI
 http://www.xxxx.top/o9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
-规则：http://www.xxxx.top/o+apiKey+IMEI
 
-# 关闭小灯，长度 64
+# 关闭小灯，长度 64，规则：http://www.xxxx.top/c+apiKey+IMEI
 http://www.xxxx.top/c9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
-规则：http://www.xxxx.top/c+apiKey+IMEI
 ```
 > **注意**：如果你的公网域名长度大于12，那么此方法还是无法实现，另想他法吧。我这个正好长度为12。
 > **注意**：对外暴露 apiKey 和 IMEI 是很危险的。此例为了让所有人都可以访问云服务，不得已而为之。
