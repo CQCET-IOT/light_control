@@ -55,7 +55,7 @@ http://123.144.xx.xxx:8099/open?apiKey=9UExxxxxxxxxxxxxxxxxxxxxkos=&imei=8858xxx
 
 ```
 # 长度 66
-http://www.xxxx.com/o/9UExxxxxxxxxxxxxxxxxxxxxkos=/8858xxxxxxxxxxx
+http://www.xxxx.top/o/9UExxxxxxxxxxxxxxxxxxxxxkos=/8858xxxxxxxxxxx
 ```
 
 > 长度还是不能满足要求。此时，我想到了短网址。在浏览器中，短网址是可以跳转到原网址的，可是，消息推送至短网址，并不能跳转到原网址，亲测。
