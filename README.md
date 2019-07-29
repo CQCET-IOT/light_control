@@ -70,6 +70,7 @@ http://www.xxxx.top/o9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
 http://www.xxxx.top/c9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
 ```
 > **注意**：如果你的公网域名长度大于12，那么此方法还是无法实现，另想他法吧。我这个正好长度为12。
+
 > **注意**：对外暴露 apiKey 和 IMEI 是很危险的。此例为了让所有人都可以访问云服务，不得已而为之。
 
 
