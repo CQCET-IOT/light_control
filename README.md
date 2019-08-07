@@ -186,7 +186,7 @@ public class LightController {
 java -jar remote-light-control-0.0.1-SNAPSHOT.jar --server.port=80
 ```
 
-这样，在 *www.zhxq.top* 服务器上，Web 程序监听 80 端口。这样端口地址也不用写了，否则 URL 又要超过长度。
+这样，在 *www.xxxx.top* 服务器上，Web 程序监听 80 端口。这样端口地址也不用写了，否则 URL 又要超过长度。
 
 在 OneNET 上添加 *LightOpen* 和 *LightClose* 触发器：
 
