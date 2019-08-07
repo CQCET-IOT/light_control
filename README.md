@@ -194,6 +194,16 @@ java -jar remote-light-control-0.0.1-SNAPSHOT.jar --server.port=80
 
 ![image_1dg89i3ad2t0m54epg19qn3u.png-91.8kB][4]
 
+触发器推送 URL 遵循以下规则：
+
+```
+# 打开小灯，长度 64，规则：http://www.xxxx.top/o+apiKey+IMEI
+http://www.xxxx.top/o9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
+
+# 关闭小灯，长度 64，规则：http://www.xxxx.top/c+apiKey+IMEI
+http://www.xxxx.top/c9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
+```
+
 遮住光照传感器，保持 30 秒以上，则触发器触发 *LightOpen* 规则，云服务调用打开命令，将灯远程打开；将光照传感器至于强光下，保持 30 秒以上，则触发器触发 *LightClose* 规则，云服务调用关闭命令，将灯远程关闭。
 
 
