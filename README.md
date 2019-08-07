@@ -8,6 +8,7 @@
 
 > **注意**：本程序因为没有固化 apiKey 和 IMEI，因此任何人只要在 OneNET 构造触发器，按照规则组装推送的 URL，则都可以使用。但实际的应用程序不可能将 apiKey 和 IMEI 作为 URL 参数使用，也不能对外暴露，因此这个项目仅仅作为培训演示使用。
 
+
 ## 开发环境
 1. jdk 1.8
 2. maven 3.0+，构建工具
@@ -193,6 +194,7 @@ java -jar remote-light-control-0.0.1-SNAPSHOT.jar --server.port=80
 ```
 
 这样，在 *www.xxxx.top* 服务器上，Web 程序监听 80 端口。这样端口地址也不用写了，否则 URL 又要超过长度。
+
 
 ## 使用
 
