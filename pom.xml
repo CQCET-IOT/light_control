@@ -5,24 +5,17 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.6.RELEASE</version>
+		<version>2.1.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cqcet</groupId>
-	<artifactId>light_control</artifactId>
+	<groupId>com.onenet</groupId>
+	<artifactId>remote-light-control</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>light_control</name>
-	<description>Demo project for Spring Boot</description>
+	<name>remote-light-control</name>
+	<description>Demo project for OneNET remote control</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<json.version>20180130</json.version>
-		<slf4j.version>1.7.20</slf4j.version>
-		<logback.version>1.2.3</logback.version>
-		<okhttp.version>3.5.0</okhttp.version>
-		<yaml.version>1.10</yaml.version>
-		<commons.lang3.version>3.4</commons.lang3.version>
-		<commons.collections.version>3.2.1</commons.collections.version>
 	</properties>
 
 	<dependencies>
@@ -36,36 +29,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>${json.version}</version>
+			<version>20180130</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons.lang3.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>${commons.collections.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>${okhttp.version}</version>
+			<groupId>cmcciot.onenet.nbapi</groupId>
+			<artifactId>sdk</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -76,7 +48,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-            <!-- 打包成可运行的Jar包 -->
+			<!-- 打包成可运行的Jar包 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
