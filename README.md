@@ -8,6 +8,12 @@
 
 > **注意**：本程序因为没有固化 apiKey 和 IMEI，因此任何人只要在 OneNET 构造触发器，按照规则组装推送的 URL，则都可以使用。但实际的应用程序不可能将 apiKey 和 IMEI 作为 URL 参数使用，也不能对外暴露，因此这个项目仅仅作为培训演示使用。
 
+## 开发环境
+1. jdk 1.8
+2. maven 3.0+，构建工具
+3. IntelliJ IDEA，IDE
+4. git，版本维护工具
+
 ## 控制小灯开关的 API 
 
 [LwM2M ﻿即时命令-写设备资源](https://open.iot.10086.cn/doc/book/application-develop/api/LwM2M/5%E5%8D%B3%E6%97%B6%E5%91%BD%E4%BB%A4-%E5%86%99%E8%AE%BE%E5%A4%87%E8%B5%84%E6%BA%90.html) 这一篇文档说得很清楚，要想开关小灯，需要构造一些参数：
