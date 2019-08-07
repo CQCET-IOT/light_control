@@ -2,9 +2,11 @@
 
 ---
 
-> 代码托管在 https://github.com/CQCET-IOT/light_control
+> 代码托管在 https://github.com/CQCET-IOT/remote-light-control
 
-M5310 有一个光照传感器，有一个可以远程控制开关的小灯。周老师某天提出，能不能通过判断光照传感器的值来自动控制小灯的开和关呢？我仔细研究了一下，发现是可行的。本程序因为没有固化 apiKey 和 IMEI，因此任何人只要在 OneNET 构造触发器，按照规则组装推送的 URL，则都可以使用。
+中移物联网 NB 开发板有一个光照传感器，有一个可以远程控制开关的小灯。周老师某天提出，能不能通过判断光照传感器的值来自动控制小灯的开和关呢？我仔细研究了一下，发现通过 OneNET 提供的触发器是可行的。
+
+> **注意**：本程序因为没有固化 apiKey 和 IMEI，因此任何人只要在 OneNET 构造触发器，按照规则组装推送的 URL，则都可以使用。但实际的应用程序不可能将 apiKey 和 IMEI 作为 URL 参数使用，也不能对外暴露，因此这个项目仅仅作为培训演示使用。
 
 ## 控制小灯开关的 API 
 
@@ -30,19 +32,28 @@ M5310 有一个光照传感器，有一个可以远程控制开关的小灯。�
 
 > LwM2M SDK 其实并不完整，比如读取数据点，就没法使用这个 SDK 来完成，反而需要用上图最后一个 SDK 来实现。不过本例使用 LwM2M SDK 即可。
 
-打开该项目，将名字空间由 *cmcciot.onenet.nbapi.sdk* 重命名为 *com.onenet*，因为我想用后面一个名字空间来建 Web 项目。
+克隆该项目，在本地编译，生成 *sdk-1.0-SNAPSHOT.jar*。使用如下命令将该 jar 包安装到本地仓库中（根据实际情况修改 jar 包路径），以方便应用程序在以后进行调用：
+
+```
+mvn install:install-file -DgroupId=cmcciot.onenet.nbapi -DartifactId=sdk -Dversion=1.0-SNAPSHOT -Dpackaging=jar -Dfile=C:\your\path\to\sdk-1.0-SNAPSHOT.jar
+```
 
 ## URL 设计
 
-OneNET 触发器允许的 URL 长度不能超过 64，所以在实现时必须尽可能地减少 URL 长度。
+OneNET 要想实现推送，则推送的地址需要位于公网上，内网地址很难穿透。因此，本应用程序需要运行在某个云端的服务器上，服务器必须具备公网 IP 地址或者公网域名。
+
+OneNET 触发器允许的 URL 长度不能超过 64，所以在实现时必须尽可能地减少 URL 长度。我们来分析一下 URL 的内容：
 
 |项|长度|
 |-|-
 |http://|7
-|公网IP地址(或公网域名)加端口|不定
+|公网IP地址(或公网域名)端口|不定
 |控制指令|至少1位，*o* 表示打开，*c* 表示关闭
 |apiKey|28
 |imei|15
+|URL分隔符|若干
+
+可以看出，固定项已经占据了至少 51 个字符，因此公网 IP 地址端口和 URL 分隔符的长度不能超过 13 个字符。
 
 首先抛弃的是下述设计，因为携带了端口号和参数字段，导致长度太长：
 
@@ -57,8 +68,7 @@ http://123.144.xx.xxx:8099/open?apiKey=9UExxxxxxxxxxxxxxxxxxxxxkos=&imei=8858xxx
 # 长度 66
 http://www.xxxx.top/o/9UExxxxxxxxxxxxxxxxxxxxxkos=/8858xxxxxxxxxxx
 ```
-
-> 长度还是不能满足要求。此时，我想到了短网址。在浏览器中，短网址是可以跳转到原网址的，可是，消息推送至短网址，并不能跳转到原网址，亲测。
+> 长度还是不能满足要求。此时，我想到了短网址。找一个短地址第三方服务，生成原网址的短地址，在浏览器中，短网址是可以跳转到原网址的，可是，消息推送至短网址，并不能跳转到原网址，亲测。
 
 现在剩下的唯一的办法是把路径中的 */* 符号去掉，长度刚好为 64。所以，最终设计为：
 
@@ -76,7 +86,25 @@ http://www.xxxx.top/c9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
 
 ## 新建 Web 项目
 
-使用 IDEA 新建一个 SpringBoot Web 项目，名字空间为 *com.onenet*。将 LwM2M 的代码拷贝进这个项目中。同时将 *resources\config.properties* 拷贝到本项目 *resources* 目录下。再将 SDK pom 文件中的依赖拷贝到新项目。
+使用 IDEA 新建一个 SpringBoot Web 项目，名字空间为 *com.onenet*。在 *pom.xml* 中引入 LwM2M SDK 的依赖：
+
+```
+<dependency>
+	<groupId>cmcciot.onenet.nbapi</groupId>
+	<artifactId>sdk</artifactId>
+	<version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
+因为要想 OneNET 发送 JSON 格式的数据，因此还需要引入 JSON 依赖：
+
+```
+<dependency>
+	<groupId>org.json</groupId>
+	<artifactId>json</artifactId>
+	<version>20180130</version>
+</dependency>
+```
 
 新建 *controller.LightController* 类，在类中实现：
 
@@ -137,7 +165,7 @@ public class LightController {
 }
 ```
 
-在 *pom.xml* 中添加插件，以便整个工程可以打包成独立运行的 jar 包：
+最后，在 *pom.xml* 中添加插件，以便整个工程可以打包成独立运行的 jar 包：
 
 ```
 <!-- 打包成可运行的Jar包 -->
@@ -150,15 +178,15 @@ public class LightController {
 
 ## 部署
 
-使用 *mvn:package* 打包，将生成的 *light_control-0.0.1-SNAPSHOT.jar* 拷贝到服务器上。
+使用 *mvn:package* 打包，将生成的 *remote-light-control-0.0.1-SNAPSHOT.jar* 拷贝到服务器上。
 
 在服务器上安装 JDK1.8，然后运行：
 
 ```
-java -jar light_control-0.0.1-SNAPSHOT.jar --server.port=80
+java -jar remote-light-control-0.0.1-SNAPSHOT.jar --server.port=80
 ```
 
-这样，在 *www.xxxx.top* 服务器上，Web 程序监听 80 端口。
+这样，在 *www.zhxq.top* 服务器上，Web 程序监听 80 端口。这样端口地址也不用写了，否则 URL 又要超过长度。
 
 在 OneNET 上添加 *LightOpen* 和 *LightClose* 触发器：
 
