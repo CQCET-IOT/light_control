@@ -8,7 +8,7 @@
 		<version>2.1.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.onenet</groupId>
+	<groupId>cmcciot.onenet.nbapi.sdk</groupId>
 	<artifactId>remote-light-control</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>remote-light-control</name>
