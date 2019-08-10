@@ -39,11 +39,7 @@
 
 > LwM2M SDK 其实并不完整，比如读取数据点，就没法使用这个 SDK 来完成，反而需要用上图最后一个 SDK 来实现。不过本例使用 LwM2M SDK 即可。
 
-克隆该项目，在本地编译，生成 *sdk-1.0-SNAPSHOT.jar*。使用如下命令将该 jar 包安装到本地仓库中（根据实际情况修改 jar 包路径），以方便应用程序在以后进行调用：
-
-```
-mvn install:install-file -DgroupId=cmcciot.onenet.nbapi -DartifactId=sdk -Dversion=1.0-SNAPSHOT -Dpackaging=jar -Dfile=C:\your\path\to\sdk-1.0-SNAPSHOT.jar
-```
+克隆该项目，得到源代码，供后面集成用。
 
 ## URL 设计
 
@@ -93,27 +89,55 @@ http://www.xxxx.top/c9UExxxxxxxxxxxxxxxxxxxxxkos=8858xxxxxxxxxxx
 
 ## 新建 Web 项目
 
-使用 IDEA 新建一个 SpringBoot Web 项目，名字空间为 *com.onenet*。在 *pom.xml* 中引入 LwM2M SDK 的依赖：
+使用 IDEA 新建一个 SpringBoot Web 项目，名字空间为 *cmcciot.onenet.nbapi.sdk*，与 SDK 相同。在 *pom.xml* 中导入 SDK 的版本定义和依赖：
 
 ```
-<dependency>
-	<groupId>cmcciot.onenet.nbapi</groupId>
-	<artifactId>sdk</artifactId>
-	<version>1.0-SNAPSHOT</version>
-</dependency>
+<properties>
+	<java.version>1.8</java.version>
+	<json.version>20180130</json.version>
+	<slf4j.version>1.7.20</slf4j.version>
+	<logback.version>1.2.3</logback.version>
+	<okhttp.version>3.5.0</okhttp.version>
+	<yaml.version>1.10</yaml.version>
+	<commons.lang3.version>3.4</commons.lang3.version>
+	<commons.collections.version>3.2.1</commons.collections.version>
+</properties>
 ```
-
-因为要想 OneNET 发送 JSON 格式的数据，因此还需要引入 JSON 依赖：
 
 ```
 <dependency>
 	<groupId>org.json</groupId>
 	<artifactId>json</artifactId>
-	<version>20180130</version>
+	<version>${json.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-lang3</artifactId>
+	<version>${commons.lang3.version}</version>
+</dependency>
+<dependency>
+	<groupId>commons-collections</groupId>
+	<artifactId>commons-collections</artifactId>
+	<version>${commons.collections.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-api</artifactId>
+	<version>${slf4j.version}</version>
+</dependency>
+<dependency>
+	<groupId>ch.qos.logback</groupId>
+	<artifactId>logback-classic</artifactId>
+	<version>${logback.version}</version>
+</dependency>
+<dependency>
+	<groupId>com.squareup.okhttp3</groupId>
+	<artifactId>okhttp</artifactId>
+	<version>${okhttp.version}</version>
 </dependency>
 ```
 
-新建 *controller.LightController* 类，在类中实现：
+将 SDK 的代码导入到工程中，并将 *config.properties* 文件拷贝到 *resources* 目录。然后新建 *controller.LightController* 类，在类中实现：
 
 ```
 @RestController
