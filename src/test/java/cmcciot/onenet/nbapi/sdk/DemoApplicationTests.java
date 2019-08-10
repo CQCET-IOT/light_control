@@ -1,4 +1,4 @@
-package com.onenet;
+package cmcciot.onenet.nbapi.sdk;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

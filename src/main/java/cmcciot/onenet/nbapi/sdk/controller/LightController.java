@@ -1,4 +1,4 @@
-package com.onenet.controller;
+package cmcciot.onenet.nbapi.sdk.controller;
 
 import cmcciot.onenet.nbapi.sdk.api.online.WriteOpe;
 import cmcciot.onenet.nbapi.sdk.entity.Write;

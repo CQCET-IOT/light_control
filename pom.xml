@@ -16,6 +16,13 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<json.version>20180130</json.version>
+		<slf4j.version>1.7.20</slf4j.version>
+		<logback.version>1.2.3</logback.version>
+		<okhttp.version>3.5.0</okhttp.version>
+		<yaml.version>1.10</yaml.version>
+		<commons.lang3.version>3.4</commons.lang3.version>
+		<commons.collections.version>3.2.1</commons.collections.version>
 	</properties>
 
 	<dependencies>
@@ -32,13 +39,34 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20180130</version>
+			<version>${json.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>cmcciot.onenet.nbapi</groupId>
-			<artifactId>sdk</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons.collections.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>${okhttp.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
