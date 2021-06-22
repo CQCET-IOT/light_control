@@ -2,7 +2,7 @@
 
 ---
 
-> 代码托管在 https://github.com/CQCET-IOT/remote-light-control
+> 代码托管在 https://github.com/CQCET-IOT/remote-light-control，适用于OneNET旧版。
 
 中移物联网 NB 开发板有一个光照传感器，有一个可以远程控制开关的小灯。周老师某天提出，能不能通过判断光照传感器的值来自动控制小灯的开和关呢？我仔细研究了一下，发现通过 OneNET 提供的触发器是可行的。
 
